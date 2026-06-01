@@ -1,0 +1,37 @@
+{
+  "records": [
+    {
+      "attributes": { "type": "Account", "referenceId": "HotelRef1" },
+      "Name": "Hilton Union Square",
+      "Phone": "+1 415-771-1400",
+      "Website": "https://hilton.com",
+      "Industry": "Hospitality",
+      "BillingCity": "San Francisco",
+      "Description": "333 O'Farrell St - flagship downtown property.",
+      "Location__Latitude__s": 37.786164,
+      "Location__Longitude__s": -122.410137
+    },
+    {
+      "attributes": { "type": "Account", "referenceId": "HotelRef2" },
+      "Name": "Hyatt Regency SF",
+      "Phone": "+1 415-788-1234",
+      "Website": "https://hyatt.com",
+      "Industry": "Hospitality",
+      "BillingCity": "San Francisco",
+      "Description": "5 Embarcadero Center - waterfront atrium hotel.",
+      "Location__Latitude__s": 37.794157,
+      "Location__Longitude__s": -122.396311
+    },
+    {
+      "attributes": { "type": "Account", "referenceId": "HotelRef3" },
+      "Name": "Marriott Marquis",
+      "Phone": "+1 415-896-1600",
+      "Website": "https://marriott.com",
+      "Industry": "Hospitality",
+      "BillingCity": "San Francisco",
+      "Description": "780 Mission St - near Moscone Center.",
+      "Location__Latitude__s": 37.785143,
+      "Location__Longitude__s": -122.403405
+    }
+  ]
+}
