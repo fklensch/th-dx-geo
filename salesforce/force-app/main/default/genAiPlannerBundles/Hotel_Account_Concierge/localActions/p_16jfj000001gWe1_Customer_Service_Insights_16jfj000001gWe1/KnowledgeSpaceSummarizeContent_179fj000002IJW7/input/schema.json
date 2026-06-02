@@ -1,0 +1,43 @@
+{
+  "required" : [ ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "KnowledgeIds" : {
+      "title" : "Knowledge IDs",
+      "description" : "Comma-separated folder (container) IDs when entire folders are selected",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "FilePaths" : {
+      "title" : "File Paths",
+      "description" : "Comma-separated paths required for summarization: one per selected file (filePath or display name), matching LWC getKnowledgeSpaceFileSummary additionalFilter.filepaths",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "KnowledgeSpaceSearchIndexId" : {
+      "title" : "Knowledge Space Search Index ID",
+      "description" : "Personal knowledge search index id for the notebook",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "SInames" : {
+      "title" : "SI Names",
+      "description" : "Comma-separated enterprise search index developer names (optional context)",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "SummarizeSegmentsJson" : {
+      "title" : "Summarize segments JSON",
+      "description" : "JSON array of segments: each object has kind (personal|enterprise), searchIndexName, containerIds (string array), filePaths (string array). When provided, the invocable summarizes each segment (personal notebook index plus enterprise indexes) instead of requiring a single personal FilePaths-only payload.",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

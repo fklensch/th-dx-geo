@@ -51,12 +51,19 @@ This is the headless auth surface — pure OAuth plumbing, no UI.
 3. **Enable OAuth**. Set a placeholder callback URL (e.g.
    `https://login.salesforce.com/services/oauth2/callback`) — it’s unused by the
    client-credentials flow but the form requires one.
-4. **Scopes**: add `Manage user data via APIs (api)` and
-   `Perform requests at any time (refresh_token, offline_access)`.
+4. **Scopes**: add `Manage user data via APIs (api)`,
+   `Perform requests at any time (refresh_token, offline_access)`, and — both
+   **required for the Agentforce Agent API** — `Access chatbot services
+   (chatbot_api)` and `Access the Salesforce API Platform (sfap_api)`.
 5. Save, then in the app’s **OAuth settings / policies**:
    - Enable the **Client Credentials Flow**.
    - Set the **Run As / execution user** to your user (or a dedicated
      integration user). The flow runs as this user.
+   - Enable **Issue JSON Web Token (JWT)-based access tokens**. This is
+     **required** for the Agent API: `api.salesforce.com` only accepts JWT
+     (`eyJ…`) tokens. Without it the client-credentials flow mints *opaque*
+     (`00D…`) tokens and `POST /einstein/ai-agent/v1/.../sessions` fails with a
+     bare **404**. (Metadata field: `isNamedUserJwtEnabled`.)
 6. Copy the **Consumer Key** → `SF_CLIENT_ID` and **Consumer Secret** →
    `SF_CLIENT_SECRET`.
 
@@ -131,5 +138,5 @@ See `../mcp/README.md` to wire the same org into Claude Code / Cursor.
 | Badge stuck on MOCK | `MOCK_MODE` not `false`, or `SF_CLIENT_ID` empty |
 | `OAuth token request failed (400)` | Client Credentials Flow not enabled, or no run-as user |
 | `Account query failed (401)` | Execution user lacks API access / permissions |
-| `Agent session start failed (404)` | Wrong `SF_AGENT_ID` or agent not activated |
+| `Agent session start failed (404)` | Wrong `SF_AGENT_ID`; agent not activated; missing `chatbot_api`/`sfap_api` scopes; or the External Client App is issuing **opaque** (`00D…`) instead of **JWT** (`eyJ…`) tokens — enable *Issue JWT-based access tokens* |
 | Agent replies but no data changes | Agent has no Account create/query actions/topics |

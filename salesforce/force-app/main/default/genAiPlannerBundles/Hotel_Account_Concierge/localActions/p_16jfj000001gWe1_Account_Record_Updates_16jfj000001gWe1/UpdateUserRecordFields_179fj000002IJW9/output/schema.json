@@ -1,0 +1,15 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordDetailOutput" : {
+      "title" : "Record Detail Output",
+      "description" : "The SObject containing the updated record details.",
+      "lightning:type" : "setup__recordDetailsType",
+      "einstein:description" : "The field-values pairs of the updated record.",
+      "copilotAction:isDisplayable" : true,
+      "copilotAction:isUsedByPlanner" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

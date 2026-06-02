@@ -1,0 +1,23 @@
+{
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordData" : {
+      "title" : "Record Data",
+      "description" : "The record data with fields and values requested by the user.",
+      "lightning:type" : "lightning__genericObjectType",
+      "einstein:description" : "A structured record data with set of fields and values using userInput.",
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true
+    },
+    "followUpQuestion" : {
+      "title" : "Follow up question",
+      "description" : "Follow up question to display full record details.",
+      "lightning:type" : "lightning__textType",
+      "einstein:description" : "Always ask follow up question to display full record details.",
+      "copilotAction:isDisplayable" : false,
+      "copilotAction:isUsedByPlanner" : true
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

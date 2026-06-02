@@ -1,0 +1,15 @@
+{
+  "required" : [ "utteranceText" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "utteranceText" : {
+      "title" : "Utterance Text",
+      "description" : "User utterance",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}
