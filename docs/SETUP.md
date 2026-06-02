@@ -5,15 +5,40 @@ flip it to **live mode** against a free Salesforce org. Everything here is $0.
 
 ---
 
-## 1. Get a free Agentforce Developer Edition org
+## 1. Pick your org: Developer Edition **or** a sandbox
+
+You can point the demo at either kind of org. The only differences are the
+**login host** and the **`SF_LOGIN_URL`** value — see the table below.
+
+### Option A — free Agentforce Developer Edition (greenfield)
 
 Sign up at the Salesforce developer portal for a **Developer Edition** org. As
 of the April 2026 refresh, free Dev Edition orgs include Agentforce, the Agent
 API, Data 360, and Salesforce-hosted MCP servers (with monthly usage caps).
 
-After signup, set up **My Domain** (Setup → My Domain) if not already done —
-your login host looks like `https://your-domain.my.salesforce.com`. That URL is
-`SF_LOGIN_URL`.
+After signup, set up **My Domain** (Setup → My Domain) if not already done.
+
+### Option B — a sandbox (copy of an existing org)
+
+A sandbox is the right choice if you want to demo against real data/config from
+an existing org. Sandboxes live on the **`test.salesforce.com`** login host and
+have a My Domain URL with a `--<SandboxName>` suffix. Note that an External
+Client App (step 2) and an agent (step 4) created in production **do** carry
+into a newly refreshed sandbox, but the **consumer secret must be re-generated
+inside the sandbox**, and agents must be re-activated there.
+
+### Which login host / `SF_LOGIN_URL` do I use?
+
+| Org type | `sf org login web` host | `SF_LOGIN_URL` in `.env` |
+|---|---|---|
+| Production / Dev Edition | `https://login.salesforce.com` (default) | `https://your-domain.my.salesforce.com` |
+| **Sandbox** | `https://test.salesforce.com` | `https://your-domain--sandboxname.sandbox.my.salesforce.com` |
+
+> The exact My Domain URL is shown in the sandbox under **Setup → My Domain**,
+> and in the browser address bar after you log in. The app sends the token
+> request to `${SF_LOGIN_URL}/services/oauth2/token` and then uses whatever
+> `instance_url` the org returns, so getting `SF_LOGIN_URL` right is all that
+> matters.
 
 ---
 
@@ -44,7 +69,14 @@ This is the headless auth surface — pure OAuth plumbing, no UI.
 
 ```bash
 cd salesforce
+
+# Dev Edition / production org (default login host):
 sf org login web --alias headless-demo --set-default
+
+# --- OR --- a sandbox (note the test.salesforce.com instance URL):
+sf org login web --alias headless-demo --set-default \
+  --instance-url https://test.salesforce.com
+
 sf project deploy start --source-dir force-app
 sf data import tree --files data/Account.json
 ```
@@ -74,9 +106,10 @@ cd app
 cp .env.example .env
 # edit .env:
 #   MOCK_MODE=false
-#   SF_LOGIN_URL=https://your-domain.my.salesforce.com
+#   SF_LOGIN_URL=...        # Dev/prod: https://your-domain.my.salesforce.com
+#                           # Sandbox:  https://your-domain--sandboxname.sandbox.my.salesforce.com
 #   SF_CLIENT_ID=...        # Consumer Key
-#   SF_CLIENT_SECRET=...    # Consumer Secret
+#   SF_CLIENT_SECRET=...    # Consumer Secret  (re-generate inside the sandbox!)
 #   SF_AGENT_ID=...         # Agent (Bot) Id
 ```
 
