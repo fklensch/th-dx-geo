@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenAiPlannerBundle xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <description>You are an AI Agent whose job is to help sales representatives manage hotel accounts for Slalom Hotels by creating, summarizing, and updating hotel account records, as well as providing insights and performance metrics.</description>
+    <localActionLinks>
+        <genAiFunctionName>AnswerQuestionsWithKnowledge_16jfj000001gWe1</genAiFunctionName>
+    </localActionLinks>
+    <localTopicLinks>
+        <genAiPluginName>p_16jfj000001gWe1_Account_Data_Summarization_16jfj000001gWe1</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>p_16jfj000001gWe1_Account_Record_Updates_16jfj000001gWe1</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>p_16jfj000001gWe1_Customer_Service_Insights_16jfj000001gWe1</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>p_16jfj000001gWe1_Hotel_Account_Creation_16jfj000001gWe1</genAiPluginName>
+    </localTopicLinks>
+    <localTopicLinks>
+        <genAiPluginName>p_16jfj000001gWe1_Hotel_Performance_Metrics_16jfj000001gWe1</genAiPluginName>
+    </localTopicLinks>
+    <localTopics>
+        <fullName>p_16jfj000001gWe1_Account_Data_Summarization_16jfj000001gWe1</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Use this topic when a sales representative requests a summary of an existing hotel account&apos;s information for quick reference.</description>
+        <developerName>p_16jfj000001gWe1_Account_Data_Summarization_16jfj000001gWe1</developerName>
+        <genAiPluginInstructions>
+            <description>To summarize an account, use Find Hotel Accounts to look it up by name; it returns key fields (city, phone, industry, website, description). Summarize directly from that result.</description>
+            <developerName>instruction_0</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_0</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Identify the account by name. Do not ask the user for a record Id.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_1</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If Find Hotel Accounts returns no matches, tell the user no account was found by that name. If several match, summarize the closest one or list them.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_2</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179fj000002IJW6</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Find_Hotel_Accounts_179fj000002IJW6</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Find_Hotel_Accounts_179fj000002IJW6</fullName>
+            <description>Searches Account records by name (partial match) and returns up to 10 matches with key fields including the record Id.</description>
+            <developerName>Find_Hotel_Accounts_179fj000002IJW6</developerName>
+            <invocationTarget>HotelAccountFinder</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Find_Hotel_Accounts</localDeveloperName>
+            <masterLabel>Find Hotel Accounts</masterLabel>
+            <progressIndicatorMessage>Pulling up account details</progressIndicatorMessage>
+        </localActions>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179fj000002IJW6</fullName>
+            <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+            <developerName>AnswerQuestionsWithKnowledge_179fj000002IJW6</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localDeveloperName>p_16jfj000001gWe1_Account_Data_Summarization</localDeveloperName>
+        <masterLabel>Account Data Summarization</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Your job is to only provide concise summaries of existing hotel account information, including key details that are relevant to the user&apos;s query. You cannot create or update records.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>p_16jfj000001gWe1_Account_Record_Updates_16jfj000001gWe1</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Use this topic when a sales representative requests updates or modifications to existing hotel account records.</description>
+        <developerName>p_16jfj000001gWe1_Account_Record_Updates_16jfj000001gWe1</developerName>
+        <genAiPluginInstructions>
+            <description>If the user requests to update a record, use AdminCopilot__UpdateUserRecordFields.</description>
+            <developerName>instruction_0</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_0</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If the user does not provide the necessary information, prompt them to specify the details to be updated.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_1</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Once all details are confirmed, proceed with updating the record.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_2</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>UpdateUserRecordFields_179fj000002IJW9</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179fj000002IJW9</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>UpdateUserRecordFields_179fj000002IJW9</fullName>
+            <description>Updates fields on a Salesforce User record. The action ExtractUserFieldsAndValues must be called prior to this action to extract the user record&apos;s fields and values.</description>
+            <developerName>UpdateUserRecordFields_179fj000002IJW9</developerName>
+            <invocationTarget>updateUserRecordFields</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>true</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>UpdateUserRecordFields</localDeveloperName>
+            <masterLabel>Update User Record Fields</masterLabel>
+            <progressIndicatorMessage>Making updates</progressIndicatorMessage>
+            <source>AdminCopilot__UpdateUserRecordFields</source>
+        </localActions>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179fj000002IJW9</fullName>
+            <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+            <developerName>AnswerQuestionsWithKnowledge_179fj000002IJW9</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localDeveloperName>p_16jfj000001gWe1_Account_Record_Updates</localDeveloperName>
+        <masterLabel>Account Record Updates</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Your job is to only update existing hotel account records with new or corrected information. You cannot create new records or provide summaries.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>p_16jfj000001gWe1_Hotel_Account_Creation_16jfj000001gWe1</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Use this topic when a sales representative wants to create new hotel records — a hotel Account, a related Contact, and/or a follow-up Task (reminder or action item).</description>
+        <developerName>p_16jfj000001gWe1_Hotel_Account_Creation_16jfj000001gWe1</developerName>
+        <genAiPluginInstructions>
+            <description>To create a hotel account, use Create Hotel Account. To add a person or contact, use Create Hotel Contact and link it to the account by name. To create a follow-up reminder or action item, use Create Follow-up Task.</description>
+            <developerName>instruction_0</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_0</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If the user provides incomplete information, prompt them for the missing details before proceeding.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_1</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>Always confirm the details with the user before creating any account, contact, or follow-up task.</description>
+            <developerName>instruction_2</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_2</masterLabel>
+            <sortOrder>2</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179fj000002IJW5</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Create_Hotel_Account_179fj000002IJW5</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Find_Hotel_Accounts_179fj000002IJW5</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Create_Hotel_Contact_179fj000002IJW5</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>Create_Followup_Task_179fj000002IJW5</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>Create_Hotel_Account_179fj000002IJW5</fullName>
+            <description>Creates a new Account record for a hotel with the provided details and returns its record Id.</description>
+            <developerName>Create_Hotel_Account_179fj000002IJW5</developerName>
+            <invocationTarget>HotelAccountCreator</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Create_Hotel_Account</localDeveloperName>
+            <masterLabel>Create Hotel Account</masterLabel>
+            <progressIndicatorMessage>Creating the new hotel record</progressIndicatorMessage>
+        </localActions>
+        <localActions>
+            <fullName>Find_Hotel_Accounts_179fj000002IJW5</fullName>
+            <description>Searches Account records by name (partial match) and returns up to 10 matches with key fields including the record Id.</description>
+            <developerName>Find_Hotel_Accounts_179fj000002IJW5</developerName>
+            <invocationTarget>HotelAccountFinder</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Find_Hotel_Accounts</localDeveloperName>
+            <masterLabel>Find Hotel Accounts</masterLabel>
+            <progressIndicatorMessage>Pulling up account details</progressIndicatorMessage>
+        </localActions>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179fj000002IJW5</fullName>
+            <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+            <developerName>AnswerQuestionsWithKnowledge_179fj000002IJW5</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localActions>
+            <fullName>Create_Hotel_Contact_179fj000002IJW5</fullName>
+            <description>Creates a Contact, optionally linked to a hotel Account by name, and returns its record Id.</description>
+            <developerName>Create_Hotel_Contact_179fj000002IJW5</developerName>
+            <invocationTarget>HotelContactCreator</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Create_Hotel_Contact</localDeveloperName>
+            <masterLabel>Create Hotel Contact</masterLabel>
+            <progressIndicatorMessage>Creating the contact</progressIndicatorMessage>
+        </localActions>
+        <localActions>
+            <fullName>Create_Followup_Task_179fj000002IJW5</fullName>
+            <description>Creates a follow-up Task (a reminder or action item), optionally linked to a hotel Account, and returns its record Id.</description>
+            <developerName>Create_Followup_Task_179fj000002IJW5</developerName>
+            <invocationTarget>HotelTaskCreator</invocationTarget>
+            <invocationTargetType>apex</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>Create_Followup_Task</localDeveloperName>
+            <masterLabel>Create Follow-up Task</masterLabel>
+            <progressIndicatorMessage>Creating the follow-up task</progressIndicatorMessage>
+        </localActions>
+        <localDeveloperName>p_16jfj000001gWe1_Hotel_Account_Creation</localDeveloperName>
+        <masterLabel>Hotel Account Creation</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Your job is to help create new hotel records: hotel Accounts, related Contacts, and follow-up Tasks (reminders or action items). Gather the necessary details and confirm with the user before creating anything. You cannot update or summarize existing records.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>p_16jfj000001gWe1_Customer_Service_Insights_16jfj000001gWe1</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Use this topic to provide insights into service quality and guest satisfaction metrics for a hotel account.</description>
+        <developerName>p_16jfj000001gWe1_Customer_Service_Insights_16jfj000001gWe1</developerName>
+        <genAiPluginInstructions>
+            <description>If the user requests guest satisfaction insights, use Personalization__PersonalizeContext.</description>
+            <developerName>instruction_0</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_0</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If the user requires additional data, use KnowledgeSpaceAgent__KnowledgeSpaceSummarizeContent to provide a summarized view of relevant content.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_1</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>PersonalizeContext_179fj000002IJW7</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>KnowledgeSpaceSummarizeContent_179fj000002IJW7</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179fj000002IJW7</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>KnowledgeSpaceSummarizeContent_179fj000002IJW7</fullName>
+            <description>Do not call unless IsSummarizeContentRequest is exactly the string true; if not true, skip this action entirely. When allowed, summarizes selected Knowledge Space sources (same pipeline as file summary). With SummarizeSegmentsJson set, summarizes each segment in order; else use KnowledgeSpaceSearchIndexId, KnowledgeIds, FilePaths, and optional SInames. Invoke once when allowed—do not refuse over file types or OCR. Output is fileSummaryResponse (summary text/markdown for custom LEX rendering).</description>
+            <developerName>KnowledgeSpaceSummarizeContent_179fj000002IJW7</developerName>
+            <invocationTarget>knowledgeSpaceSummarizeContent</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>KnowledgeSpaceSummarizeContent</localDeveloperName>
+            <masterLabel>Knowledge Space Summarize Content</masterLabel>
+            <progressIndicatorMessage>Summarizing your selected sources</progressIndicatorMessage>
+            <source>KnowledgeSpaceAgent__KnowledgeSpaceSummarizeContent</source>
+        </localActions>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179fj000002IJW7</fullName>
+            <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+            <developerName>AnswerQuestionsWithKnowledge_179fj000002IJW7</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localActions>
+            <fullName>PersonalizeContext_179fj000002IJW7</fullName>
+            <description>Improve agent decisioning with real-time access to summarized, personalization data.</description>
+            <developerName>PersonalizeContext_179fj000002IJW7</developerName>
+            <invocationTarget>createContextPersonalization</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>PersonalizeContext</localDeveloperName>
+            <masterLabel>Personalization: Get Context</masterLabel>
+            <progressIndicatorMessage>Creating a personalized context for you...</progressIndicatorMessage>
+            <source>Personalization__PersonalizeContext</source>
+        </localActions>
+        <localDeveloperName>p_16jfj000001gWe1_Customer_Service_Insights</localDeveloperName>
+        <masterLabel>Customer Service Insights</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Your job is to only provide insights related to customer service quality and guest satisfaction. This includes analyzing feedback and summarizing key trends or areas of improvement. You cannot create or update account records.</scope>
+    </localTopics>
+    <localTopics>
+        <fullName>p_16jfj000001gWe1_Hotel_Performance_Metrics_16jfj000001gWe1</fullName>
+        <canEscalate>false</canEscalate>
+        <description>Use this topic when a sales representative needs to track and present key performance indicators (KPIs) for a hotel account.</description>
+        <developerName>p_16jfj000001gWe1_Hotel_Performance_Metrics_16jfj000001gWe1</developerName>
+        <genAiPluginInstructions>
+            <description>If the user requests performance metrics, use DataCloudAgent__CdpRtdgStatus.</description>
+            <developerName>instruction_0</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_0</masterLabel>
+            <sortOrder>0</sortOrder>
+        </genAiPluginInstructions>
+        <genAiPluginInstructions>
+            <description>If additional metrics are required, use AdminCopilot__GetOrgHealthAndUsageData to provide an overview of organizational health.</description>
+            <developerName>instruction_1</developerName>
+            <language xsi:nil="true"/>
+            <masterLabel>instruction_1</masterLabel>
+            <sortOrder>1</sortOrder>
+        </genAiPluginInstructions>
+        <language>en_US</language>
+        <localActionLinks>
+            <functionName>GetOrgHealthAndUsageData_179fj000002IJW8</functionName>
+        </localActionLinks>
+        <localActionLinks>
+            <functionName>AnswerQuestionsWithKnowledge_179fj000002IJW8</functionName>
+        </localActionLinks>
+        <localActions>
+            <fullName>GetOrgHealthAndUsageData_179fj000002IJW8</fullName>
+            <description>Fetches the overview of the Salesforce org’s health and usage metrics</description>
+            <developerName>GetOrgHealthAndUsageData_179fj000002IJW8</developerName>
+            <invocationTarget>getOrgHealthAndUsageData</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>GetOrgHealthAndUsageData</localDeveloperName>
+            <masterLabel>Get Org Health and Usage Data</masterLabel>
+            <source>AdminCopilot__GetOrgHealthAndUsageData</source>
+        </localActions>
+        <localActions>
+            <fullName>AnswerQuestionsWithKnowledge_179fj000002IJW8</fullName>
+            <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+            <developerName>AnswerQuestionsWithKnowledge_179fj000002IJW8</developerName>
+            <invocationTarget>streamKnowledgeSearch</invocationTarget>
+            <invocationTargetType>standardInvocableAction</invocationTargetType>
+            <isConfirmationRequired>false</isConfirmationRequired>
+            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+            <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+            <masterLabel>Answer Questions with Knowledge</masterLabel>
+            <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+            <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+        </localActions>
+        <localDeveloperName>p_16jfj000001gWe1_Hotel_Performance_Metrics</localDeveloperName>
+        <masterLabel>Hotel Performance Metrics</masterLabel>
+        <pluginType>Topic</pluginType>
+        <scope>Your job is to only track and present key performance metrics for hotels, including occupancy rates, revenue, and other KPIs. You cannot create or update account records.</scope>
+    </localTopics>
+    <masterLabel>Hotel Account Concierge</masterLabel>
+    <plannerActions>
+        <fullName>AnswerQuestionsWithKnowledge_16jfj000001gWe1</fullName>
+        <description>Answers questions about company policies and procedures, troubleshooting steps, or product information. For example: “What is your return policy?” “How do I fix an issue?” or “What features does a product have?”</description>
+        <developerName>AnswerQuestionsWithKnowledge_16jfj000001gWe1</developerName>
+        <invocationTarget>streamKnowledgeSearch</invocationTarget>
+        <invocationTargetType>standardInvocableAction</invocationTargetType>
+        <isConfirmationRequired>false</isConfirmationRequired>
+        <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
+        <localDeveloperName>AnswerQuestionsWithKnowledge</localDeveloperName>
+        <masterLabel>Answer Questions with Knowledge</masterLabel>
+        <progressIndicatorMessage>Getting answers</progressIndicatorMessage>
+        <source>EmployeeCopilot__AnswerQuestionsWithKnowledge</source>
+    </plannerActions>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__CustomerWebClient</surface>
+        <surfaceType>CustomerWebClient</surfaceType>
+    </plannerSurfaces>
+    <plannerSurfaces>
+        <adaptiveResponseAllowed>true</adaptiveResponseAllowed>
+        <callRecordingAllowed>false</callRecordingAllowed>
+        <surface>SurfaceAction__Messaging</surface>
+        <surfaceType>Messaging</surfaceType>
+    </plannerSurfaces>
+    <plannerType>AiCopilot__ReAct</plannerType>
+</GenAiPlannerBundle>

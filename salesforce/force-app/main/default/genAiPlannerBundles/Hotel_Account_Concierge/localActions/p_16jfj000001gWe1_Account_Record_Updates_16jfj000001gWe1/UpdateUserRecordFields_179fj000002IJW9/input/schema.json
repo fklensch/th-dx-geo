@@ -1,0 +1,16 @@
+{
+  "required" : [ "recordDetailInput" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "recordDetailInput" : {
+      "title" : "Record Detail Input",
+      "description" : "The SObject containing the ID and the field-value pairs to update.",
+      "lightning:type" : "setup__recordDetailsType",
+      "einstein:description" : "Required. Field-value pairs for the user record to be updated. The value of this input parameter must be the exact output of ExtractUserFieldsAndValues recordDetails, don't ever change the recordDetails output.",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType",
+  "lightning:textIndexed" : true
+}

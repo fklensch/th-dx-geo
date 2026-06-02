@@ -1,0 +1,14 @@
+{
+  "required" : [ "searchText" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "searchText" : {
+      "title" : "Search Text",
+      "description" : "Full or partial hotel account name to search for",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

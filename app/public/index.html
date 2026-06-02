@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <title>Salesforce Headless 360 — Hotel Concierge</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header>
+      <div class="logo" aria-hidden="true">🏨</div>
+      <div class="header-text">
+        <h1>Hotel Account Concierge</h1>
+        <p class="tagline">A headless Salesforce demo — no Salesforce UI, just APIs.</p>
+      </div>
+      <span id="mode-badge" class="badge header-badge">…</span>
+    </header>
+
+    <main>
+      <!-- Layer 1: CRM Data REST API -->
+      <section class="panel" id="data-panel">
+        <div class="panel-head">
+          <h2>CRM Data</h2>
+          <span class="surface">Data REST API</span>
+        </div>
+
+        <form id="create-form" class="create-form">
+          <input class="grow" name="Name" placeholder="New hotel account name…" required />
+          <input name="BillingCity" placeholder="City" aria-label="City" />
+          <button type="submit" class="btn">Add</button>
+        </form>
+
+        <ul id="account-list" class="account-list">
+          <li class="empty">Loading accounts…</li>
+        </ul>
+      </section>
+
+      <!-- Layer 2: Agentforce Agent API -->
+      <section class="panel" id="chat-panel">
+        <div class="panel-head">
+          <h2>Agentforce</h2>
+          <span class="surface">Agent API</span>
+        </div>
+
+        <div id="chat-log" class="chat-log">
+          <div class="msg agent">
+            Hi! Ask me about your hotel accounts — e.g. “Find the Edge
+            Communications account” or “Create a new hotel in Oakland”.
+          </div>
+        </div>
+
+        <div class="transcript-tool">
+          <button type="button" id="transcript-toggle" class="ghost-btn" aria-expanded="false">
+            📋 Analyze a call transcript
+          </button>
+          <div id="transcript-box" class="transcript-box" hidden>
+            <textarea id="transcript-input" rows="6" placeholder="Paste a call transcript here…" aria-label="Call transcript"></textarea>
+            <div class="transcript-actions">
+              <button type="button" id="transcript-sample" class="btn-link">Load sample</button>
+              <span class="grow"></span>
+              <button type="button" id="transcript-cancel" class="btn-link">Cancel</button>
+              <button type="button" id="transcript-run" class="btn">Recommend actions</button>
+            </div>
+          </div>
+        </div>
+
+        <form id="chat-form" class="chat-form">
+          <input class="grow" id="chat-input" placeholder="Message the agent…" autocomplete="off" required />
+          <button type="submit" class="btn">Send</button>
+        </form>
+      </section>
+    </main>
+
+    <footer id="footer">
+      <span id="status-line">Connecting…</span>
+    </footer>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

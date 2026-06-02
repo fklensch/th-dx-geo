@@ -1,0 +1,14 @@
+# One-command local run:  docker compose up --build
+# Serves the headless concierge UI at http://localhost:3000
+services:
+  concierge:
+    build: ./app
+    ports:
+      - "3000:3000"
+    env_file:
+      - path: ./app/.env
+        required: false
+    environment:
+      # Default so the app runs in mock mode even before app/.env exists.
+      MOCK_MODE: ${MOCK_MODE:-true}
+    restart: unless-stopped

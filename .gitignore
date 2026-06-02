@@ -1,2 +1,20 @@
+# Secrets — never commit real credentials
+.env
+**/.env
+.env.*
+**/.env.*
+!**/.env.example
+
+# Node
+node_modules/
+dist/
+npm-debug.log*
+
+# Salesforce
 .sfdx/
+.sf/
+
+# OS / editor
+.DS_Store
 .vscode/
+*.log

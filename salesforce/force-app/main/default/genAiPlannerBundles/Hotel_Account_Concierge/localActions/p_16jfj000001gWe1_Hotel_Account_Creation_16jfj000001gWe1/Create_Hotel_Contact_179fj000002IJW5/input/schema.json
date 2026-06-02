@@ -1,0 +1,49 @@
+{
+  "required" : [ "lastName" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "lastName" : {
+      "title" : "Last Name",
+      "description" : "Last name of the contact",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "firstName" : {
+      "title" : "First Name",
+      "description" : "First name of the contact",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "email" : {
+      "title" : "Email",
+      "description" : "Email address",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "phone" : {
+      "title" : "Phone",
+      "description" : "Phone number",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "title" : {
+      "title" : "Title",
+      "description" : "Job title or role",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "accountName" : {
+      "title" : "Account Name",
+      "description" : "Name of the hotel account to link this contact to (optional)",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}
