@@ -1,0 +1,35 @@
+{
+  "required" : [ "subject" ],
+  "unevaluatedProperties" : false,
+  "properties" : {
+    "subject" : {
+      "title" : "Subject",
+      "description" : "What the follow-up is about, e.g. Send proposal to Pacific Crest Hotel",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "dueDate" : {
+      "title" : "Due Date",
+      "description" : "Due date in YYYY-MM-DD format",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "accountName" : {
+      "title" : "Account Name",
+      "description" : "Name of the hotel account this task relates to (optional)",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    },
+    "notes" : {
+      "title" : "Notes",
+      "description" : "Additional details for the task",
+      "lightning:type" : "lightning__textType",
+      "lightning:isPII" : false,
+      "copilotAction:isUserInput" : false
+    }
+  },
+  "lightning:type" : "lightning__objectType"
+}

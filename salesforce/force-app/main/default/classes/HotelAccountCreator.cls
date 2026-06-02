@@ -23,18 +23,27 @@ public with sharing class HotelAccountCreator {
         description='Creates a new Account record for a hotel with the provided details and returns its record Id.')
     public static List<Result> createAccount(List<Request> requests) {
         List<Result> results = new List<Result>();
-        List<Account> toInsert = new List<Account>();
         for (Request req : requests) {
-            toInsert.add(new Account(
-                Name = req.name,
+            Result r = new Result();
+            String nm = req.name == null ? '' : req.name.trim();
+            // Idempotent: reuse an existing same-name account instead of duplicating it.
+            List<Account> existing = [SELECT Id, Name FROM Account WHERE Name = :nm LIMIT 1];
+            if (!existing.isEmpty()) {
+                r.recordId = existing[0].Id;
+                r.message = 'Account "' + existing[0].Name + '" already exists (Id ' + existing[0].Id + ') — reusing it.';
+                results.add(r);
+                continue;
+            }
+            Account a = new Account(
+                Name = nm,
                 BillingCity = req.city,
                 Phone = req.phone,
                 Website = req.website
-            ));
-        }
-        insert toInsert;
-        for (Account a : toInsert) {
-            Result r = new Result();
+            );
+            // Don't let standard duplicate rules block the demo.
+            Database.DMLOptions dml = new Database.DMLOptions();
+            dml.DuplicateRuleHeader.AllowSave = true;
+            Database.insert(a, dml);
             r.recordId = a.Id;
             r.message = 'Created account "' + a.Name + '" with Id ' + a.Id + '.';
             results.add(r);
