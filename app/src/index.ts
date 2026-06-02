@@ -3,6 +3,10 @@
 // Salesforce server-to-server (OAuth client credentials) and exposes the CRM
 // Data REST API (layer 1) and the Agentforce Agent API (layer 2) to a small UI.
 
+// Load .env into process.env BEFORE anything reads config. This import must
+// stay first: config.js evaluates env vars at module load, so dotenv has to run
+// before that module is imported below.
+import "dotenv/config";
 import express from "express";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
