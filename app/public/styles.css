@@ -51,7 +51,10 @@ html { -webkit-text-size-adjust: 100%; }
 
 body {
   margin: 0;
-  min-height: 100dvh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Inter", system-ui, sans-serif;
   font-size: 14px;
   line-height: 1.5;
@@ -71,6 +74,7 @@ header {
   padding: 16px 24px;
   border-bottom: 1px solid hsl(var(--border));
   background: hsl(var(--card));
+  flex: none;
 }
 .logo {
   display: grid;
@@ -125,15 +129,30 @@ header h1 {
 
 /* ---- Layout ---------------------------------------------------------- */
 main {
+  flex: 1;
+  min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr);
   gap: 20px;
   padding: 24px;
   max-width: 1120px;
   margin: 0 auto;
   width: 100%;
+  overflow: hidden;
 }
-@media (max-width: 800px) { main { grid-template-columns: 1fr; padding: 16px; gap: 16px; } }
+@media (max-width: 800px) {
+  body { height: auto; overflow: visible; }
+  main {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+    flex: none;
+    overflow: visible;
+    padding: 16px;
+    gap: 16px;
+  }
+  .panel { height: 72vh; }
+}
 
 .panel {
   background: hsl(var(--card));
@@ -143,7 +162,8 @@ main {
   box-shadow: var(--shadow-sm);
   display: flex;
   flex-direction: column;
-  min-height: 520px;
+  min-height: 0;
+  height: 100%;
   overflow: hidden;
 }
 .panel-head {
@@ -220,11 +240,15 @@ input:focus-visible { border-color: hsl(var(--ring)); }
 /* ---- Data panel ------------------------------------------------------ */
 .create-form {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   padding: 14px 18px;
   border-bottom: 1px solid hsl(var(--border));
 }
-.create-form .grow { flex: 1; }
+.create-form input { min-width: 0; }
+.create-form input[name="Name"] { flex: 1 1 100%; }        /* hotel name: its own full-width row */
+.create-form input[name="BillingCity"] { flex: 1 1 auto; } /* city shares the next row with Add */
+.create-form .btn { flex: none; }
 
 .account-list {
   list-style: none;
@@ -232,6 +256,7 @@ input:focus-visible { border-color: hsl(var(--ring)); }
   padding: 8px;
   overflow-y: auto;
   flex: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -340,6 +365,7 @@ input:focus-visible { border-color: hsl(var(--ring)); }
 /* ---- Chat panel ------------------------------------------------------ */
 .chat-log {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
   padding: 18px;
   display: flex;
@@ -450,6 +476,7 @@ footer {
   color: hsl(var(--muted-foreground));
   border-top: 1px solid hsl(var(--border));
   font-variant-numeric: tabular-nums;
+  flex: none;
 }
 
 /* ---- Motion preferences --------------------------------------------- */

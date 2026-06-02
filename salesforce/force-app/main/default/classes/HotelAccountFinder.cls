@@ -20,7 +20,7 @@ public with sharing class HotelAccountFinder {
             String term = req.searchText == null ? '' : req.searchText.trim();
             String pattern = '%' + term + '%';
             List<Account> accts = [
-                SELECT Id, Name, Phone, Website, Industry, BillingCity
+                SELECT Id, Name, Phone, Website, Industry, BillingCity, Description
                 FROM Account
                 WHERE Name LIKE :pattern
                 ORDER BY Name
@@ -37,6 +37,7 @@ public with sharing class HotelAccountFinder {
                     if (a.Phone != null) line += ', Phone: ' + a.Phone;
                     if (a.Industry != null) line += ', Industry: ' + a.Industry;
                     if (a.Website != null) line += ', Website: ' + a.Website;
+                    if (a.Description != null) line += ', Description: ' + a.Description;
                     lines.add(line);
                 }
                 r.matches = String.join(lines, '\n');

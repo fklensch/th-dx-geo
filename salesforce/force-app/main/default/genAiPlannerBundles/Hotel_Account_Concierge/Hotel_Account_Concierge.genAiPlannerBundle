@@ -25,30 +25,27 @@
         <description>Use this topic when a sales representative requests a summary of an existing hotel account&apos;s information for quick reference.</description>
         <developerName>p_16jfj000001gWe1_Account_Data_Summarization_16jfj000001gWe1</developerName>
         <genAiPluginInstructions>
-            <description>If the user requests a summary of an account, use AdminCopilot__ShowRecordFieldValues.</description>
+            <description>To summarize an account, use Find Hotel Accounts to look it up by name; it returns key fields (city, phone, industry, website, description). Summarize directly from that result.</description>
             <developerName>instruction_0</developerName>
             <language xsi:nil="true"/>
             <masterLabel>instruction_0</masterLabel>
             <sortOrder>0</sortOrder>
         </genAiPluginInstructions>
         <genAiPluginInstructions>
-            <description>If the user specifies a record ID, retrieve the details for that specific record.</description>
+            <description>Identify the account by name. Do not ask the user for a record Id.</description>
             <developerName>instruction_1</developerName>
             <language xsi:nil="true"/>
             <masterLabel>instruction_1</masterLabel>
             <sortOrder>1</sortOrder>
         </genAiPluginInstructions>
         <genAiPluginInstructions>
-            <description>If the user refers to an account by name rather than a record ID, first use Find Hotel Accounts to look it up (it returns matching records with their record Ids), then summarize the matching account. Only ask for a record ID if no matches are found.</description>
+            <description>If Find Hotel Accounts returns no matches, tell the user no account was found by that name. If several match, summarize the closest one or list them.</description>
             <developerName>instruction_2</developerName>
             <language xsi:nil="true"/>
             <masterLabel>instruction_2</masterLabel>
             <sortOrder>2</sortOrder>
         </genAiPluginInstructions>
         <language>en_US</language>
-        <localActionLinks>
-            <functionName>ShowRecordFieldValues_179fj000002IJW6</functionName>
-        </localActionLinks>
         <localActionLinks>
             <functionName>AnswerQuestionsWithKnowledge_179fj000002IJW6</functionName>
         </localActionLinks>
@@ -66,18 +63,6 @@
             <localDeveloperName>Find_Hotel_Accounts</localDeveloperName>
             <masterLabel>Find Hotel Accounts</masterLabel>
             <progressIndicatorMessage>Pulling up account details</progressIndicatorMessage>
-        </localActions>
-        <localActions>
-            <fullName>ShowRecordFieldValues_179fj000002IJW6</fullName>
-            <description>Fetch record details for a given record ID and object API name, and retrieve specific field values when explicitly requested in the user utterance.</description>
-            <developerName>ShowRecordFieldValues_179fj000002IJW6</developerName>
-            <invocationTarget>showRecordFieldValues</invocationTarget>
-            <invocationTargetType>standardInvocableAction</invocationTargetType>
-            <isConfirmationRequired>false</isConfirmationRequired>
-            <isIncludeInProgressIndicator>true</isIncludeInProgressIndicator>
-            <localDeveloperName>ShowRecordFieldValues</localDeveloperName>
-            <masterLabel>Show Record Field Values</masterLabel>
-            <source>AdminCopilot__ShowRecordFieldValues</source>
         </localActions>
         <localActions>
             <fullName>AnswerQuestionsWithKnowledge_179fj000002IJW6</fullName>
